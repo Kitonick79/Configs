@@ -2,13 +2,12 @@
   pkgs,
   ...
 }: {
-  wayland.windowManager.hyprland = {
-  enable = true;
-  xwayland.enable = true;
+  wayland.windowManager.hyprland.enable = true;
+  wayland.windowManager.hyprland.xwayland.enable = true;
   
-  settings."$mod" = "SUPER"; #TODO: substitute SUPER with mod
+  wayland.windowManager.hyprland.settings."$mod" = "SUPER"; #TODO: substitute SUPER with mod
 
-  settings.bind = [
+  wayland.windowManager.hyprland.settings.bind = [
     # starting applications
         "SUPER,RETURN,exec,kitty"
         #"SUPER,E,exec,ghostty -e yazi"
@@ -16,7 +15,7 @@
         # window management
         "SUPER,Q,killactive"
         "SUPER,M,exit"
-        "SUPER,S,togglefloatieng"
+        "SUPER,S,togglefloating"
         "SUPER,F,fullscreen"
 
         # move the active window to the next position
@@ -80,7 +79,7 @@
       "bind=SUPER,tab,changegroupactive"
       ];
 
-  settings.input = {
+  wayland.windowManager.hyprland.settings.input = {
         kb_layout = "us,ru";
         kb_variant = "ffffff";
         kb_options = "grp:alt_shift_toggle";
@@ -90,15 +89,16 @@
         # must click on window to move focus
         # follow_mouse=2
 
-  settings.touchpad = {
+  wayland.windowManager.hyprland.settings.input.touchpad = {
           natural_scroll = "yes";
           scroll_factor = 0.7;
         };
-      };
+      
 
       # move and resize windows with the mouse cursor
-      settings.bindm = [
+  wayland.windowManager.hyprland.settings.bindm = [
         "SUPER,mouse:272,movewindow"
         "SHIFT_SUPER,mouse:272,resizewindow"
         ];
+
 }
