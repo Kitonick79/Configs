@@ -80,16 +80,17 @@
       "bind=SUPER,tab,changegroupactive"
       ];
 
-      input = {
+  settings.input = {
         kb_layout = "us,ru";
         kb_variant = "ffffff";
         kb_options = "grp:alt_shift_toggle";
-        sensitivity = 0.3; # for mouse cursor
-chtef
+        sensitivity = 0.3; 
+      };
+        # for mouse cursor
         # must click on window to move focus
         # follow_mouse=2
 
-        touchpad = {
+  settings.touchpad = {
           natural_scroll = "yes";
           scroll_factor = 0.7;
         };
@@ -100,5 +101,4 @@ chtef
         "SUPER,mouse:272,movewindow"
         "SHIFT_SUPER,mouse:272,resizewindow"
         ];
-};
 }
