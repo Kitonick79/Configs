@@ -1,6 +1,6 @@
 # This is your home-manager configuration file
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
-{host-settings, services, ...}: let
+{host-settings, ...}: let
   darkAfterSeconds = 60 * 5;
   lockAfterSeconds = 60 * 15;
   suspendAfterSeconds = 60 * 30;
