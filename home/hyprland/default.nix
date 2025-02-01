@@ -32,9 +32,9 @@
         ", XF86MonBrightnessDown,   exec, brightnessctl set 10%-"
 
         # volume control (for pipewire / wireplumber)
-        #", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-        #", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%+"
-        #", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%-"
+        ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        ", XF86AudioRaiseVolume, exec, wpctl set-volume @D#EFAULT_AUDIO_SINK@ 10%+"
+        3", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%-"
 
         # disable notifications
         # TODO: find how to do it with hyprpanel
@@ -82,7 +82,7 @@
   wayland.windowManager.hyprland.settings.input = {
         kb_layout = "us,ru";
         kb_variant = "ffffff";
-        kb_options = "grp:alt_shift_toggle";
+        kb_options = "grp:alt_space_toggle";
         sensitivity = 0.3; 
       };
         # for mouse cursor

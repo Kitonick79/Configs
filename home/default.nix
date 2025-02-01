@@ -4,6 +4,7 @@
   imports = [
     ./programs/vscode.nix
     ./hyprland
+    ./hypridle
   ];
 
   nixpkgs.config.allowUnfree = true;
