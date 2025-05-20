@@ -1,7 +1,12 @@
 {
-  #pkgs,
+  pkgs,
   ...
 }: {
+  home.packages = with pkgs; [
+    anyrun
+  ];
+
+
   wayland.windowManager.hyprland.enable = true;
   wayland.windowManager.hyprland.xwayland.enable = true;
   
@@ -10,6 +15,7 @@
   wayland.windowManager.hyprland.settings.bind = [
     # starting applications
         "SUPER,RETURN,exec,kitty"
+        "SUPER,SPACE,exec,anyrun"
         #"SUPER,E,exec,ghostty -e yazi"
 
         # window management

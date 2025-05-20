@@ -1,9 +1,9 @@
 # This is your home-manager configuration file
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
-{host-settings, ...}: let
-  darkAfterSeconds = 60 * 5;
-  lockAfterSeconds = 60 * 15;
-  suspendAfterSeconds = 60 * 30;
+{host-settings, pkgs, ...}: let
+  darkAfterSeconds = 60 * 3;
+  lockAfterSeconds = 60 * 5;
+  suspendAfterSeconds = 60 * 10;
 in {
     wayland.hypridle.listener = [
     {
@@ -42,7 +42,6 @@ in {
         ignore_dbus_inhibit = false; # whether to ignore dbus-sent idle-inhibit requests (used by e.g. firefox or steam)
         ignore_systemd_inhibit = false; # whether to ignore systemd-inhibit --what=idle inhibitors
       };
-      inherit (host-settings.wayland.hypridle) listener;
     };
   };
 }
