@@ -1,13 +1,20 @@
-{  pkgs, ... }:
+{pkgs, ...}: {
+  catppuccin = {
+    enable = true;
+    flavor = "mocha";
+    cursors = {
+      enable = true;
+    };
+  };
 
-{
   imports = [
-    ./programs/vscode.nix
+    ./programs
     ./hyprland
+    ./hyprpanel
     # ./hypridle
   ];
 
-  nixpkgs.config.allowUnfree = true;
+  # nixpkgs.config.allowUnfree = true;
 
   # TODO please change the username & home directory to your own
   home.username = "kit";
@@ -36,12 +43,12 @@
     # networking tools
     mtr # A network diagnostic tool
     iperf3
-    dnsutils  # `dig` + `nslookup`
+    dnsutils # `dig` + `nslookup`
     ldns # replacement of `dig`, it provide the command `drill`
     aria2 # A lightweight multi-protocol & multi-source command-line download utility
     socat # replacement of openbsd-netcat
     nmap # A utility for network discovery and security auditing
-    ipcalc  # it is a calculator for the IPv4/v6 addresses
+    ipcalc # it is a calculator for the IPv4/v6 addresses
 
     # misc
     file
@@ -61,7 +68,7 @@
 
     # productivity
 
-    btop  # replacement of htop/nmon
+    btop # replacement of htop/nmon
     iotop # io monitoring
     iftop # network monitoring
 
@@ -78,9 +85,9 @@
     usbutils # lsusb
 
     zsh
-    vscode 
-	telegram-desktop
-	google-chrome
+    vscode
+    telegram-desktop
+    google-chrome
   ];
 
   # basic configuration of git, please change to your own
@@ -100,6 +107,10 @@
       gcloud.disabled = true;
       line_break.disabled = true;
     };
+  };
+
+  home.sessionVariables = {
+    FLAKE = "/home/kit/nixos";
   };
 
   # This value determines the home Manager release that your

@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   home.packages = with pkgs; [
     nil # Nix language server
   ];
@@ -9,22 +6,21 @@
     enable = true;
     enableUpdateCheck = false;
     mutableExtensionsDir = false;
-    extensions = with pkgs.vscode-extensions;
-      [
-        ms-azuretools.vscode-docker
-        catppuccin.catppuccin-vsc
-        catppuccin.catppuccin-vsc-icons
-        jnoortheen.nix-ide
-        github.copilot
-        #hashicorp.terraform
-        ms-kubernetes-tools.vscode-kubernetes-tools
-        ms-python.python
-        redhat.vscode-yaml
-        shd101wyy.markdown-preview-enhanced
-        davidanson.vscode-markdownlint
-        #dbaeumer.vscode-eslint
-        #hashicorp.hcl
-      ];
+    extensions = with pkgs.vscode-extensions; [
+      ms-azuretools.vscode-docker
+      catppuccin.catppuccin-vsc
+      catppuccin.catppuccin-vsc-icons
+      jnoortheen.nix-ide
+      github.copilot
+      #hashicorp.terraform
+      ms-kubernetes-tools.vscode-kubernetes-tools
+      ms-python.python
+      redhat.vscode-yaml
+      shd101wyy.markdown-preview-enhanced
+      davidanson.vscode-markdownlint
+      #dbaeumer.vscode-eslint
+      #hashicorp.hcl
+    ];
     userSettings = {
       "workbench.colorTheme" = "Catppuccin Mocha";
       "workbench.iconTheme" = "catppuccin-mocha";

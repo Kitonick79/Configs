@@ -2,10 +2,6 @@
   pkgs,
   ...
 }: {
-  home.packages = with pkgs; [
-    anyrun
-  ];
-
 
   wayland.windowManager.hyprland.enable = true;
   wayland.windowManager.hyprland.xwayland.enable = true;
@@ -87,7 +83,7 @@
 
   wayland.windowManager.hyprland.settings.input = {
         kb_layout = "us,ru";
-        kb_variant = "ffffff";
+        kb_variant = ",qwerty";
         kb_options = "grp:alt_space_toggle";
         sensitivity = 0.3; 
       };
@@ -97,7 +93,7 @@
 
   wayland.windowManager.hyprland.settings.input.touchpad = {
           natural_scroll = "yes";
-          scroll_factor = 0.7;
+          scroll_factor = 0.6;
         };
       
 

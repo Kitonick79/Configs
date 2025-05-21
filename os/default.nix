@@ -1,4 +1,4 @@
-_:{
+_: {
   imports = [
     ./configuration.nix
     ./nh.nix

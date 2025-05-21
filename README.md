@@ -1,4 +1,4 @@
-# Running `nh`
+# Common operations
 
 1. To rebuild NixOS:
 
@@ -10,4 +10,16 @@ nh os switch
 
 ```shell
 nh home switch
+```
+
+3. To update all packages
+
+```shell
+nix flake update
+```
+
+4. To update a single input:
+
+```shell
+nix flake update <hyprland>
 ```

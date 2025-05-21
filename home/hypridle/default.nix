@@ -1,11 +1,15 @@
 # This is your home-manager configuration file
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
-{host-settings, pkgs, ...}: let
+{
+  host-settings,
+  pkgs,
+  ...
+}: let
   darkAfterSeconds = 60 * 3;
   lockAfterSeconds = 60 * 5;
   suspendAfterSeconds = 60 * 10;
 in {
-    wayland.hypridle.listener = [
+  wayland.hypridle.listener = [
     {
       timeout = darkAfterSeconds;
       on-timeout = ''brightnessctl -s set 15%''; # set monitor backlight to minimum, avoid 0 on OLED monitor.
