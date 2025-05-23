@@ -1,5 +1,5 @@
 {
-  pkgs,
+  
   ...
 }: {
 
@@ -83,7 +83,7 @@
 
   wayland.windowManager.hyprland.settings.input = {
         kb_layout = "us,ru";
-        kb_variant = ",qwerty";
+        kb_variant = ",";
         kb_options = "grp:alt_space_toggle";
         sensitivity = 0.3; 
       };
@@ -93,7 +93,7 @@
 
   wayland.windowManager.hyprland.settings.input.touchpad = {
           natural_scroll = "yes";
-          scroll_factor = 0.6;
+          scroll_factor = 0.5;
         };
       
 

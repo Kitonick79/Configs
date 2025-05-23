@@ -36,8 +36,18 @@
     # Configure bar layouts for monitors.
     # See 'https://hyprpanel.com/configuration/panel.html'.
     # Default: null
+    #settings = {
+    # layout = {
+    #   "bar.layouts" = {
+    #     "0" = {
+    #       "left" = ["dashboard" "workspaces" "windowtitle"];
+    #       "middle" = ["media"];
+    #       "right" = ["battery" "network" "clock"];
+    #     };
+    #   };  
+    # };
   };
-
+  
   home.packages = with pkgs; [
     # optional deps
     gpustat
