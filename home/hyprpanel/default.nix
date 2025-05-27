@@ -44,10 +44,10 @@
     #       "middle" = ["media"];
     #       "right" = ["battery" "network" "clock"];
     #     };
-    #   };  
+    #   };
     # };
   };
-  
+
   home.packages = with pkgs; [
     # optional deps
     gpustat

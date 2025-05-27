@@ -6,7 +6,7 @@
   pkgs,
   ...
 }: {
-  catppuccin ={
+  catppuccin = {
     enable = true;
     flavor = "mocha";
   };
@@ -56,6 +56,11 @@
     variant = "";
   };
 
+  services = {
+    gvfs.enable = true;
+    power-profiles-daemon.enable = true;
+    upower.enable = true;
+  };
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.kit = {
     isNormalUser = true;
@@ -82,9 +87,39 @@
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
-   
-
   programs.hyprland.enable = true;
+
+  nix = {
+    settings = {
+      trusted-users = ["root" "dan" "@wheel"];
+      substituters = [
+        "https://hyprland.cachix.org"
+        "https://nixpkgs-wayland.cachix.org"
+        "https://pre-commit-hooks.cachix.org"
+        "https://danielgafni.cachix.org"
+        "https://nix-community.cachix.org"
+        "https://anyrun.cachix.org"
+        "https://chaotic-nyx.cachix.org/"
+      ];
+      trusted-public-keys = [
+        "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+        "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
+        "pre-commit-hooks.cachix.org-1:Pkk3Panw5AW24TOv6kz3PvLhlH8puAsJTBbOPmBo7Rc="
+        "danielgafni.cachix.org-1:ZdXJoJEqeiGGOf/MtAiocqj7/vvFbA2MWFVwopJ2WQM="
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+        "anyrun.cachix.org-1:pqBobmOjI7nKlsUMV25u9QHa9btJK65/C8vnO3p346s="
+        "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8"
+      ];
+      #experimental-features = ["nix-command" "flakes"];
+      auto-optimise-store = true;
+    };
+
+    # gc = {
+    #   automatic = true;
+    #   dates = "weekly";
+    #   options = "--delete-older-than 30d";
+    # };
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

@@ -10,6 +10,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    anyrun = {
+      url = "github:anyrun-org/anyrun";
+      # inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     hyprland.url = "github:hyprwm/Hyprland";
 
     nh.url = "github:nix-community/nh";
@@ -29,6 +34,7 @@
     home-manager,
     hyprland,
     nh,
+    anyrun,
     hyprpanel,
     nixpkgs-wayland,
     catppuccin,
@@ -53,7 +59,7 @@
       modules = [
         ./home
         catppuccin.homeModules.catppuccin
-        ];
+      ];
     };
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       inherit system pkgs;
