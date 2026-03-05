@@ -23,3 +23,11 @@ nix flake update
 ```shell
 nix flake update <hyprland>
 ```
+
+5. Using Flake:
+
+```
+sudo nixos-rebuild switch --flake .#nixos
+
+home-manager --flake .#kit@nixos switch
+```

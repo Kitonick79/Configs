@@ -54,7 +54,7 @@
     gpu-screen-recorder
     hyprpicker
     hyprsunset
-    hypridle
+    #hypridle
     btop
     matugen
     swww

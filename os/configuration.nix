@@ -73,7 +73,7 @@
   };
 
   # Allow unfree packages
-  # nixpkgs.config.allowUnfree = true;
+  #nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -83,6 +83,7 @@
     kitty
     git
     racket
+  
   ];
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
@@ -91,7 +92,7 @@
 
   nix = {
     settings = {
-      trusted-users = ["root" "dan" "@wheel"];
+      trusted-users = ["root" "kit" "@wheel"];
       substituters = [
         "https://hyprland.cachix.org"
         "https://nixpkgs-wayland.cachix.org"

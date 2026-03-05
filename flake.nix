@@ -36,6 +36,7 @@
     nh,
     anyrun,
     hyprpanel,
+    #hyperidle,
     nixpkgs-wayland,
     catppuccin,
   } @ inputs: let
@@ -59,7 +60,7 @@
       modules = [
         ./home
         catppuccin.homeModules.catppuccin
-      ];
+        ];
     };
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       inherit system pkgs;

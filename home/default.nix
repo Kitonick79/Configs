@@ -11,10 +11,11 @@
     ./programs
     ./hyprland
     ./hyprpanel
-    # ./hypridle
+    #./hypridle
   ];
 
   # nixpkgs.config.allowUnfree = true;
+  home.sessionVariables.NH_FLAKE = "/home/kit/nixos";
 
   # TODO please change the username & home directory to your own
   home.username = "kit";
@@ -93,7 +94,7 @@
   # basic configuration of git, please change to your own
   programs.git = {
     enable = true;
-    userName = "Kitonick";
+    userName = "Kitonick79";
     userEmail = "myagkov.dv@gmail.com";
   };
 
