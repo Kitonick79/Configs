@@ -12,16 +12,18 @@
 
     anyrun = {
       url = "github:anyrun-org/anyrun";
-      # inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nh.url = "github:nix-community/nh";
 
     hyprpanel = {
-      # newer versions were broken
-      url = "github:Jas-SinghFSU/HyprPanel?rev=2be9f1ef6c2df2ecf0eebe5a039e8029d8d151cd";
+      url = "github:Jas-SinghFSU/HyprPanel";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -46,7 +48,6 @@
       inherit system;
       overlays = [
         inputs.nixpkgs-wayland.overlay
-        inputs.hyprpanel.overlay
       ];
       config = {
         allowUnfree = true;

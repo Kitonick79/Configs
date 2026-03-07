@@ -26,7 +26,7 @@
     # here is some command line tools I use frequently
     # feel free to add your own or remove some of them
 
-    neofetch
+    fastfetch
 
     # archives
     zip
@@ -94,8 +94,10 @@
   # basic configuration of git, please change to your own
   programs.git = {
     enable = true;
-    userName = "Kitonick79";
-    userEmail = "myagkov.dv@gmail.com";
+    settings = {
+      user.name = "Kitonick79";
+      user.email = "myagkov.dv@gmail.com";
+    };
   };
 
   # starship - an customizable prompt for any shell
@@ -112,6 +114,7 @@
 
   home.sessionVariables = {
     FLAKE = "/home/kit/nixos";
+    WLR_DRM_DEVICES = "/dev/dri/card1"; # force Hyprland to use Intel iGPU, avoids AMD cross-GPU instability
   };
 
   # This value determines the home Manager release that your

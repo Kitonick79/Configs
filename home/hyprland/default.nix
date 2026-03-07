@@ -4,6 +4,12 @@
 
   wayland.windowManager.hyprland.settings."$mod" = "SUPER"; #TODO: substitute SUPER with mod
 
+  wayland.windowManager.hyprland.settings.env = [
+    "GDK_BACKEND,wayland"
+    "GSK_RENDERER,cairo"
+    "WLR_DRM_DEVICES,/dev/dri/card1"
+  ];
+
   wayland.windowManager.hyprland.settings.bind = [
     # starting applications
     "SUPER,RETURN,exec,kitty"

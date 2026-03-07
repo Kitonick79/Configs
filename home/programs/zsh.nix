@@ -13,7 +13,7 @@
       vids = "$HOME/Videos";
       nixpkgs = "$HOME/Documents/code/git/nixpkgs";
     };
-    dotDir = ".config/zsh";
+    dotDir = "${config.xdg.configHome}/zsh";
     history = {
       expireDuplicatesFirst = true;
       path = "${config.xdg.dataHome}/zsh_history";
@@ -21,6 +21,12 @@
       save = 100000;
     };
 
+    profileExtra = ''
+      # Auto-start Hyprland via uwsm on TTY1
+      if uwsm check may-start && uwsm select; then
+        exec uwsm start default
+      fi
+    '';
     #initContent = builtins.readFile ./.zshrc;
 
     shellAliases = {

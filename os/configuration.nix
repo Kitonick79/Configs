@@ -83,12 +83,15 @@
     kitty
     git
     racket
-  
+    claude-code
   ];
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
+  services.dbus.implementation = "broker";
+
   programs.hyprland.enable = true;
+  programs.hyprland.withUWSM = true;
 
   nix = {
     settings = {
