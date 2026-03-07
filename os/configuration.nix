@@ -86,6 +86,11 @@
     claude-code
   ];
 
+  fonts.packages = with pkgs; [
+    material-symbols
+    nerd-fonts.jetbrains-mono
+  ];
+
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   services.dbus.implementation = "broker";

@@ -14,6 +14,8 @@
     #./hypridle
   ];
 
+  gtk.enable = true;
+
   # nixpkgs.config.allowUnfree = true;
   home.sessionVariables.NH_FLAKE = "/home/kit/nixos";
 
