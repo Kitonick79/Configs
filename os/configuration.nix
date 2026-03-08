@@ -60,6 +60,7 @@
     gvfs.enable = true;
     power-profiles-daemon.enable = true;
     upower.enable = true;
+    logind.lidSwitch = "suspend";
   };
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.kit = {

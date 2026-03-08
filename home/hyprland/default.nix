@@ -44,6 +44,9 @@
     # TODO: find how to do it with hyprpanel
     # "SHIFT_SUPER,N,exec,makoctl mode -t do-not-disturb"
 
+    # lock screen
+    "SUPER,L,exec,loginctl lock-session"
+
     # hyprland management
     "SUPER,R,exec,hyprctl reload"
 

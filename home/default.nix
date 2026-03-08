@@ -11,7 +11,8 @@
     ./programs
     ./hyprland
     ./hyprpanel
-    #./hypridle
+    ./hypridle
+    ./hyprlock
   ];
 
   gtk.enable = true;
@@ -42,6 +43,7 @@
     yq-go # yaml processor https://github.com/mikefarah/yq
     eza # A modern replacement for ‘ls’
     fzf # A command-line fuzzy finder
+    glow # a cli markdown renderer 
 
     # networking tools
     mtr # A network diagnostic tool

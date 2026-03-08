@@ -2,6 +2,9 @@
   programs.hyprpanel = {
     enable = true;
     systemd.enable = true;
+    settings = {
+      theme.font.size = "13px";
+    };
   };
 
   home.packages = with pkgs; [
