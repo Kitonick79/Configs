@@ -37,7 +37,7 @@
 
     # volume control (for pipewire / wireplumber)
     ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-    ", XF86AudioRaiseVolume, exec, wpctl set-volume @D#EFAULT_AUDIO_SINK@ 10%+"
+    ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%+"
     ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%-"
 
     # disable notifications
@@ -51,10 +51,10 @@
     "SUPER,R,exec,hyprctl reload"
 
     # navigation between windows
-    "SUPER, le ft,movefocus, l"
-    "SUPER, ri ght,movefocus, r"
+    "SUPER, left,movefocus, l"
+    "SUPER, right,movefocus, r"
     "SUPER, up ,movefocus, u"
-    "SUPER, do wn,movefocus, d"
+    "SUPER, down,movefocus, d"
 
     #  works pa  ce selecti on
     "SUPER, 1, workspace, 1"
