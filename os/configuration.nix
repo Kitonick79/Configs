@@ -62,6 +62,17 @@
     upower.enable = true;
     logind.lidSwitch = "suspend";
   };
+
+  # Reload psmouse after resume to fix touchpad left button not working (EPROTO on serio3)
+  systemd.services.psmouse-reload = {
+    description = "Reload psmouse after resume";
+    wantedBy = ["post-resume.target"];
+    after = ["post-resume.target"];
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.kmod}/bin/modprobe -r psmouse; ${pkgs.kmod}/bin/modprobe psmouse";
+    };
+  };
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.kit = {
     isNormalUser = true;
