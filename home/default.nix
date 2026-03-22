@@ -82,6 +82,8 @@
     ltrace # library call monitoring
     lsof # list open files
 
+    brightnessctl
+
     # system tools
     sysstat
     lm_sensors # for `sensors` command
@@ -89,6 +91,7 @@
     pciutils # lspci
     usbutils # lsusb
 
+    obsidian
     zsh
     vscode
     telegram-desktop
@@ -121,6 +124,7 @@
     WLR_DRM_DEVICES = "/dev/dri/card1"; # force Hyprland to use Intel iGPU, avoids AMD cross-GPU instability
     EDITOR = "vim";
     VISUAL = "vim";
+    NIXOS_OZONE_WL = "1"; 
   };
 
   # This value determines the home Manager release that your

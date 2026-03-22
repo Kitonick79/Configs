@@ -22,6 +22,18 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Blacklist AMD dGPU: Intel iGPU (card1) handles all rendering/display.
+  # AMD RX 540X causes instability via ATPX Hybrid Graphics even when not
+  # used by Hyprland (apps like Chrome can still trigger the AMD driver).
+  boot.blacklistedKernelModules = [ "amdgpu" ];
+
+  # Panic and reboot on kernel lockup instead of hanging silently for 12+ minutes.
+  boot.kernel.sysctl = {
+    "kernel.softlockup_panic" = 1;
+    "kernel.hung_task_panic" = 1;
+    "kernel.panic" = 10; # reboot 10 seconds after panic
+  };
+
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
