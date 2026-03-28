@@ -3,6 +3,7 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {
   config,
+  lib,
   pkgs,
   ...
 }: {
@@ -122,6 +123,7 @@
 
   programs.nano.enable = false;
   programs.neovim.defaultEditor = true;
+  environment.variables.EDITOR = lib.mkForce "nvim";
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
