@@ -4,6 +4,12 @@
 
   wayland.windowManager.hyprland.settings."$mod" = "SUPER"; #TODO: substitute SUPER with mod
 
+  wayland.windowManager.hyprland.settings.monitor = [
+    "HDMI-A-1, 2560x1080@60, 0x0, 1"
+    "eDP-1, 1920x1080@60, 2560x0, 1.5"
+    ", preferred, auto, 1" # fallback for any other monitor
+  ];
+
   wayland.windowManager.hyprland.settings.env = [
     "GDK_BACKEND,wayland"
     "GSK_RENDERER,cairo"

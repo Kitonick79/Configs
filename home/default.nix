@@ -122,8 +122,8 @@
   home.sessionVariables = {
     FLAKE = "/home/kit/nixos";
     WLR_DRM_DEVICES = "/dev/dri/card1"; # force Hyprland to use Intel iGPU, avoids AMD cross-GPU instability
-    EDITOR = "vim";
-    VISUAL = "vim";
+    EDITOR = "nvim";
+    VISUAL = "nvim";
     NIXOS_OZONE_WL = "1"; 
   };
 

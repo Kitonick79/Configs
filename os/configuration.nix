@@ -68,6 +68,11 @@
     variant = "";
   };
 
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  };
+
   services = {
     gvfs.enable = true;
     power-profiles-daemon.enable = true;
@@ -115,9 +120,41 @@
     nerd-fonts.jetbrains-mono
   ];
 
+  programs.nano.enable = false;
+  programs.neovim.defaultEditor = true;
+
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   services.dbus.implementation = "broker";
+
+  # Audio: use Speaker profile (not Headphones) so laptop speakers work.
+  # Profile 1 = Headphones (jack-detect only), Profile 2 = Speaker (built-in).
+  services.pipewire.wireplumber.extraConfig."50-speaker-profile" = {
+    "monitor.alsa.rules" = [
+      {
+        matches = [{ "device.name" = "alsa_card.pci-0000_00_1f.3-platform-skl_hda_dsp_generic"; }];
+        actions.update-props = {
+          "api.acp.auto-profile" = false;
+          "api.acp.auto-port" = false;
+          "device.profile" = "HiFi (HDMI1, HDMI2, HDMI3, Mic1, Mic2, Speaker)";
+        };
+      }
+      {
+        matches = [{ "node.name" = "~alsa_output.*Speaker.*"; }];
+        actions.update-props = {
+          "priority.session" = 5000;
+          "priority.driver" = 5000;
+        };
+      }
+      {
+        matches = [{ "node.name" = "~alsa_output.*HDMI.*"; }];
+        actions.update-props = {
+          "priority.session" = 100;
+          "priority.driver" = 100;
+        };
+      }
+    ];
+  };
 
   programs.hyprland.enable = true;
   programs.hyprland.withUWSM = true;

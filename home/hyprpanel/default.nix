@@ -17,5 +17,6 @@
     matugen
     swww
     grimblast
+    bluez
   ];
 }
