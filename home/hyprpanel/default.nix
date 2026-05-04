@@ -15,7 +15,7 @@
     hyprsunset
     btop
     matugen
-    swww
+    # swww  # broken in nixpkgs after awww rename: install phase looks for completions/awww.bash
     grimblast
     bluez
   ];
