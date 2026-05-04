@@ -96,6 +96,7 @@
     vscode
     telegram-desktop
     google-chrome
+    tor-browser
   ];
 
   # basic configuration of git, please change to your own
