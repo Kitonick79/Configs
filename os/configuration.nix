@@ -28,6 +28,10 @@
   # used by Hyprland (apps like Chrome can still trigger the AMD driver).
   boot.blacklistedKernelModules = [ "amdgpu" ];
 
+  # Disable i915 Panel Self Refresh (PSR): causes silent GPU hangs on
+  # Coffeelake/ULT (Gen 9.5) after S3 resume, especially with Chrome GPU video.
+  boot.extraModprobeConfig = "options i915 enable_psr=0";
+
   # Panic and reboot on kernel lockup instead of hanging silently for 12+ minutes.
   boot.kernel.sysctl = {
     "kernel.softlockup_panic" = 1;
