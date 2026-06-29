@@ -119,6 +119,7 @@
   };
 
   # Allow unfree packages
+  # Note: configured in flake.nix where pkgs is instantiated
   #nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search, run:
@@ -130,6 +131,7 @@
     git
     racket
     claude-code
+    zoom-us
   ];
 
   fonts.packages = with pkgs; [
