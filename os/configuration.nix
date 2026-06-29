@@ -32,6 +32,10 @@
   # Coffeelake/ULT (Gen 9.5) after S3 resume, especially with Chrome GPU video.
   boot.extraModprobeConfig = "options i915 enable_psr=0";
 
+  # Force SMBus/RMI4 mode on Synaptics touchpad: PS/2 mode loses left button
+  # after resume (EPROTO on serio3). Intertouch uses I2C transport instead.
+  boot.kernelParams = [ "psmouse.synaptics_intertouch=1" ];
+
   # Panic and reboot on kernel lockup instead of hanging silently for 12+ minutes.
   boot.kernel.sysctl = {
     "kernel.softlockup_panic" = 1;
