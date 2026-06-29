@@ -98,6 +98,7 @@
     telegram-desktop
     google-chrome
     tor-browser
+    zotero
   ];
 
   # basic configuration of git, please change to your own
