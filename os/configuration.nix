@@ -87,6 +87,10 @@
     power-profiles-daemon.enable = true;
     upower.enable = true;
     logind.lidSwitch = "suspend";
+    # Workaround for util-linux 2.42 agetty regression (util-linux#4306):
+    # netlink events during boot cause the login prompt to be reprinted ~10x.
+    # --noissue skips reading /etc/issue, avoiding the refresh path entirely.
+    getty.extraArgs = [ "--noissue" ];
   };
 
   # Reload psmouse after resume to fix touchpad left button not working (EPROTO on serio3)
