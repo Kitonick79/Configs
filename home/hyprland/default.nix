@@ -96,7 +96,8 @@
     kb_layout = "us,ru";
     kb_variant = ",";
     kb_options = "grp:alt_space_toggle";
-    sensitivity = 0.3;
+    sensitivity = -0.5;
+    natural_scroll = "yes";
   };
   # for mouse cursor
   # must click on window to move focus
