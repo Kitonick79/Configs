@@ -23,6 +23,8 @@
     nh.url = "github:nix-community/nh";
 
     catppuccin.url = "github:catppuccin/nix";
+
+    claude-desktop.url = "github:k3d3/claude-desktop-linux-flake";
   };
 
   outputs = {
@@ -35,6 +37,7 @@
     #hyperidle,
     nixpkgs-wayland,
     catppuccin,
+    claude-desktop,
   } @ inputs: let
     system = "x86_64-linux";
 

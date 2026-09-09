@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   catppuccin = {
     enable = true;
     flavor = "mocha";
@@ -99,6 +103,8 @@
     google-chrome
     tor-browser
     zotero
+
+    inputs.claude-desktop.packages.${pkgs.stdenv.hostPlatform.system}.claude-desktop-with-fhs
   ];
 
   # basic configuration of git, please change to your own
