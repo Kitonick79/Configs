@@ -22,11 +22,6 @@
 
     nh.url = "github:nix-community/nh";
 
-    hyprpanel = {
-      url = "github:Jas-SinghFSU/HyprPanel";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     catppuccin.url = "github:catppuccin/nix";
   };
 
@@ -37,7 +32,6 @@
     hyprland,
     nh,
     anyrun,
-    hyprpanel,
     #hyperidle,
     nixpkgs-wayland,
     catppuccin,
