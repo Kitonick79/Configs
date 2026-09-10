@@ -14,7 +14,7 @@
   imports = [
     ./programs
     ./hyprland
-    ./hyprpanel
+    ./waybar
     ./hypridle
     ./hyprlock
   ];
