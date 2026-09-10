@@ -104,8 +104,20 @@
     tor-browser
     zotero
 
-    inputs.claude-desktop.packages.${pkgs.stdenv.hostPlatform.system}.claude-desktop-with-fhs
+    inputs.claude-desktop.packages.${pkgs.stdenv.hostPlatform.system}.claude-desktop
   ];
+
+  xdg.configFile."google-chrome/NativeMessagingHosts/com.anthropic.claude_browser_extension.json".text = builtins.toJSON {
+    name = "com.anthropic.claude_browser_extension";
+    description = "Claude Browser Extension Native Host";
+    path = "${inputs.claude-desktop.packages.${pkgs.stdenv.hostPlatform.system}.claude-desktop}/lib/claude-desktop/resources/chrome-native-host";
+    type = "stdio";
+    allowed_origins = [
+      "chrome-extension://dihbgbndebgnbjfmelmegjepbnkhlgni/"
+      "chrome-extension://fcoeoabgfenejglbffodgkkbkcdhcgfn/"
+      "chrome-extension://dngcpimnedloihjnnfngkgjoidhnaolf/"
+    ];
+  };
 
   # basic configuration of git, please change to your own
   programs.git = {
