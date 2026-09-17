@@ -49,6 +49,7 @@
     fzf # A command-line fuzzy finder
     glow # a cli markdown renderer
     yazi # terminal file manager
+    gh # GitHub CLI
 
     # networking tools
     mtr # A network diagnostic tool
