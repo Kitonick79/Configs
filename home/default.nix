@@ -102,6 +102,7 @@
     vscode
     telegram-desktop
     google-chrome
+    brave
     tor-browser
     zotero
 
