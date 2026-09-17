@@ -1,116 +1,134 @@
-{...}: {
+{lib, ...}: let
+  inherit (lib.generators) mkLuaInline;
+in {
   wayland.windowManager.hyprland.enable = true;
   wayland.windowManager.hyprland.xwayland.enable = true;
 
-  wayland.windowManager.hyprland.settings."$mod" = "SUPER"; #TODO: substitute SUPER with mod
+  # Hyprland 0.55+ deprecates hyprlang in favour of Lua. Setting this explicitly
+  # also silences home-manager's stateVersion-based default warning, and makes
+  # catppuccin's `colors._var` render as a usable `local colors = ...`.
+  wayland.windowManager.hyprland.configType = "lua";
 
   wayland.windowManager.hyprland.settings.monitor = [
-    "HDMI-A-1, 2560x1080@60, 0x0, 1"
-    "eDP-1, 1920x1080@60, 2560x0, 1.5"
-    ", preferred, auto, 1" # fallback for any other monitor
+    {
+      output = "HDMI-A-1";
+      mode = "2560x1080@60";
+      position = "0x0";
+      scale = 1;
+    }
+    {
+      output = "eDP-1";
+      mode = "1920x1080@60";
+      position = "2560x0";
+      scale = 1.5;
+    }
+    # fallback for any other monitor
+    {
+      output = "";
+      mode = "preferred";
+      position = "auto";
+      scale = 1;
+    }
   ];
 
+  # `_args` renders an attrset as a multi-argument Lua call: hl.env("K", "V")
   wayland.windowManager.hyprland.settings.env = [
-    "GDK_BACKEND,wayland"
-    "GSK_RENDERER,cairo"
-    "WLR_DRM_DEVICES,/dev/dri/card1"
+    {_args = ["GDK_BACKEND" "wayland"];}
+    {_args = ["GSK_RENDERER" "cairo"];}
+    {_args = ["WLR_DRM_DEVICES" "/dev/dri/card1"];}
   ];
 
-  wayland.windowManager.hyprland.settings.bind = [
-    # starting applications
-    "SUPER,RETURN,exec,kitty"
-    "SUPER,SPACE,exec,anyrun"
-    #"SUPER,E,exec,ghostty -e yazi"
+  wayland.windowManager.hyprland.settings.config = {
+    # `colors` is the local that catppuccin's module defines above this call
+    general.col = {
+      active_border = mkLuaInline "{ colors = { colors.accent, colors.lavender }, angle = 45 }";
+      inactive_border = mkLuaInline "colors.surface0";
+    };
 
-    # window management
-    "SUPER,Q,killactive"
-    "SUPER,M,exit"
-    "SUPER,S,togglefloating"
-    "SUPER,F,fullscreen"
-
-    # move the active window to the next position
-    "SUPER,N,swapnext"
-    # make the active window the main
-    "SUPER,A,togglesplit"
-
-    # screenshots
-    ",Print,exec,grim - | wl-copy"
-    ''SHIFT,Print,exec,grim -g "$(slurp)" - | wl-copy''
-
-    # brightness control
-    ", XF86MonBrightnessUp,     exec, brightnessctl set 10%+"
-    ", XF86MonBrightnessDown,   exec, brightnessctl set 10%-"
-
-    # volume control (for pipewire / wireplumber)
-    ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-    ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%+"
-    ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%-"
-
-    # disable notifications
-    # TODO: find how to do it with hyprpanel
-    # "SHIFT_SUPER,N,exec,makoctl mode -t do-not-disturb"
-
-    # lock screen
-    "SUPER,L,exec,loginctl lock-session"
-
-    # hyprland management
-    "SUPER,R,exec,hyprctl reload"
-
-    # navigation between windows
-    "SUPER, left,movefocus, l"
-    "SUPER, right,movefocus, r"
-    "SUPER, up ,movefocus, u"
-    "SUPER, down,movefocus, d"
-
-    #  works pa  ce selecti on
-    "SUPER, 1, workspace, 1"
-    "SUPER, 2, workspace, 2"
-    "SUPER, 3, workspace, 3"
-    "SUPER, 4, workspace, 4"
-    "SUPER, 5, workspace, 5"
-    "SUPER, 6, workspace, 6"
-    "SUPER, 7, workspace, 7"
-    "SUPER, 8, workspace, 8"
-    "SUPER, 9, workspace, 9"
-    "SUPER, 0, workspace, 10"
-
-    # move window to workspace
-    "CTRL_SUPER, 1, movetoworkspace, 1"
-    "CTRL_SUPER, 2, movetoworkspace, 2"
-    "CTRL_SUPER, 3, movetoworkspace, 3"
-    "CTRL_SUPER, 4, movetoworkspace, 4"
-    "CTRL_SUPER, 5, movetoworkspace, 5"
-    "CTRL_SUPER, 6, movetoworkspace, 6"
-    "CTRL_SUPER, 7, movetoworkspace, 7"
-    "CTRL_SUPER, 8, movetoworkspace, 8"
-    "CTRL_SUPER, 9, movetoworkspace, 9"
-    "CTRL_SUPER, 0, movetoworkspace, 10"
-
-    "bind=SUPER,mouse_down,workspace,e+1"
-    "bind=SUPER,mouse_up,workspace,e-1"
-    "bind=SUPER,g,togglegroup"
-    "bind=SUPER,tab,changegroupactive"
-  ];
-
-  wayland.windowManager.hyprland.settings.input = {
-    kb_layout = "us,ru";
-    kb_variant = ",";
-    kb_options = "grp:alt_space_toggle";
-    sensitivity = -0.5;
-    natural_scroll = "yes";
-  };
-  # for mouse cursor
-  # must click on window to move focus
-  # follow_mouse=2
-
-  wayland.windowManager.hyprland.settings.input.touchpad = {
-    natural_scroll = "yes";
-    scroll_factor = 0.5;
+    input = {
+      kb_layout = "us,ru";
+      kb_variant = ",";
+      kb_options = "grp:alt_space_toggle";
+      sensitivity = -0.5;
+      natural_scroll = true;
+      # for mouse cursor
+      # must click on window to move focus
+      # follow_mouse = 2
+      touchpad = {
+        natural_scroll = true;
+        scroll_factor = 0.5;
+      };
+    };
   };
 
-  # move and resize windows with the mouse cursor
-  wayland.windowManager.hyprland.settings.bindm = [
-    "SUPER,mouse:272,movewindow"
-    "SHIFT_SUPER,mouse:272,resizewindow"
-  ];
+  # Binds are code rather than data, so they read better as plain Lua than as
+  # nested `_args` attrsets. This block is appended to hyprland.lua, so the
+  # `colors` local and everything above is in scope here too.
+  wayland.windowManager.hyprland.extraConfig = ''
+    local mod = "SUPER"
+
+    -- starting applications
+    hl.bind(mod .. " + RETURN", hl.dsp.exec_cmd("kitty"))
+    hl.bind(mod .. " + SPACE", hl.dsp.exec_cmd("anyrun"))
+    -- hl.bind(mod .. " + E", hl.dsp.exec_cmd("ghostty -e yazi"))
+
+    -- window management
+    hl.bind(mod .. " + Q", hl.dsp.window.close())
+    hl.bind(mod .. " + M", hl.dsp.exit())
+    hl.bind(mod .. " + S", hl.dsp.window.float({ action = "toggle" }))
+    hl.bind(mod .. " + F", hl.dsp.window.fullscreen())
+
+    -- move the active window to the next position
+    hl.bind(mod .. " + N", hl.dsp.window.swap({ next = true }))
+    -- make the active window the main
+    hl.bind(mod .. " + A", hl.dsp.layout("togglesplit"))
+
+    -- screenshots
+    hl.bind("Print", hl.dsp.exec_cmd("grim - | wl-copy"))
+    hl.bind("SHIFT + Print", hl.dsp.exec_cmd([[grim -g "$(slurp)" - | wl-copy]]))
+
+    -- brightness control
+    hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl set 10%+"))
+    hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl set 10%-"))
+
+    -- volume control (for pipewire / wireplumber)
+    hl.bind("XF86AudioMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"))
+    hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%+"))
+    hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%-"))
+
+    -- disable notifications
+    -- TODO: find how to do it with waybar
+    -- hl.bind(mod .. " + SHIFT + N", hl.dsp.exec_cmd("makoctl mode -t do-not-disturb"))
+
+    -- lock screen
+    hl.bind(mod .. " + L", hl.dsp.exec_cmd("loginctl lock-session"))
+
+    -- hyprland management
+    hl.bind(mod .. " + R", hl.dsp.exec_cmd("hyprctl reload"))
+
+    -- navigation between windows
+    hl.bind(mod .. " + left", hl.dsp.focus({ direction = "left" }))
+    hl.bind(mod .. " + right", hl.dsp.focus({ direction = "right" }))
+    hl.bind(mod .. " + up", hl.dsp.focus({ direction = "up" }))
+    hl.bind(mod .. " + down", hl.dsp.focus({ direction = "down" }))
+
+    -- workspace selection, and moving the active window to a workspace
+    for i = 1, 10 do
+      local key = i % 10 -- 10 maps to key 0
+      hl.bind(mod .. " + " .. key, hl.dsp.focus({ workspace = i }))
+      hl.bind(mod .. " + CTRL + " .. key, hl.dsp.window.move({ workspace = i }))
+    end
+
+    -- scroll through workspaces
+    hl.bind(mod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
+    hl.bind(mod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
+
+    -- groups (tabbed containers)
+    hl.bind(mod .. " + g", hl.dsp.group.toggle())
+    hl.bind(mod .. " + tab", hl.dsp.group.next())
+
+    -- move and resize windows with the mouse cursor
+    hl.bind(mod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
+    hl.bind(mod .. " + SHIFT + mouse:272", hl.dsp.window.resize(), { mouse = true })
+  '';
 }
