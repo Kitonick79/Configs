@@ -129,7 +129,6 @@
     wget
     kitty
     git
-    racket
     claude-code
     zoom-us
   ];
