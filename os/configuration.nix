@@ -9,6 +9,9 @@
 }: {
   catppuccin = {
     enable = true;
+    # See the matching note in home/default.nix: pin auto-enrolment explicitly
+    # ahead of the 27.05 semantics change.
+    autoEnable = true;
     flavor = "mocha";
   };
 

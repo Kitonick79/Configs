@@ -5,11 +5,19 @@
 }: {
   catppuccin = {
     enable = true;
+    # Explicit: as of 27.05 `enable` becomes a global off-switch and port
+    # auto-enrolment moves to `autoEnable`. Pinning it to our current
+    # `enable` value keeps today's behaviour across that change.
+    autoEnable = true;
     flavor = "mocha";
     cursors = {
       enable = true;
     };
   };
+
+  # catppuccin's cursors module sets `home.pointerCursor.{name,package}` but
+  # not `.enable`; relying on that implicit enablement is deprecated.
+  home.pointerCursor.enable = true;
 
   imports = [
     ./programs
@@ -96,6 +104,11 @@
     ethtool
     pciutils # lspci
     usbutils # lsusb
+
+    # languages
+    # Provides `python`, `python3` and `python3.14` (stdlib only; use a
+    # per-project nix shell or python3.withPackages for libraries).
+    python3
 
     obsidian
     zsh
