@@ -76,7 +76,8 @@ in {
     hl.bind(mod .. " + Q", hl.dsp.window.close())
     hl.bind(mod .. " + M", hl.dsp.exit())
     hl.bind(mod .. " + S", hl.dsp.window.float({ action = "toggle" }))
-    hl.bind(mod .. " + F", hl.dsp.window.fullscreen())
+    hl.bind(mod .. " + F", hl.dsp.window.fullscreen({ mode = "fullscreen" }))
+    hl.bind(mod .. " + SHIFT + F", hl.dsp.window.fullscreen({ mode = "maximized" }))
 
     -- move the active window to the next position
     hl.bind(mod .. " + N", hl.dsp.window.swap({ next = true }))
