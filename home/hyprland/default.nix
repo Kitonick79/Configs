@@ -38,6 +38,17 @@ in {
     {_args = ["WLR_DRM_DEVICES" "/dev/dri/card1"];}
   ];
 
+  # "Smart gaps": drop gaps and the border on a workspace holding a single
+  # tiled, visible window (`w[tv1]`). Renders as one `hl.workspace_rule(...)`.
+  wayland.windowManager.hyprland.settings.workspace_rule = [
+    {
+      workspace = "w[tv1]";
+      gaps_out = 0;
+      gaps_in = 0;
+      border_size = 0;
+    }
+  ];
+
   wayland.windowManager.hyprland.settings.config = {
     # `colors` is the local that catppuccin's module defines above this call
     general.col = {
