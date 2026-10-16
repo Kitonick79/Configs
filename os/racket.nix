@@ -5,10 +5,16 @@
 # `raco pkg install sicp`, which installs into ~/.local/share/racket/<version>
 # and breaks whenever the Racket version changes.
 {pkgs, ...}: let
-  # https://github.com/sicp-lang/sicp — provides the sicp, sicp-pict and
+  # https://github.com/sicp-lang/sicp — upstream ships the sicp, sicp-pict and
   # sicp-doc collections. Its deps (base, draw-lib, r5rs-lib, rackunit-lib,
-  # snip-lib) all ship with the full racket distribution, so there is nothing
+  # snip-lib) all come with the full racket distribution, so there is nothing
   # further to fetch.
+  #
+  # sicp-doc is deliberately left out. It carries only Scribble sources, and
+  # building those here would pull in the doc toolchain for no runtime gain.
+  # It is also the only one of the three with an info.rkt, which makes
+  # `raco setup` want to write an info-domain table into this derivation --
+  # impossible in the read-only store, so it would fail every `raco setup`.
   sicpCollects = pkgs.stdenv.mkDerivation {
     pname = "racket-sicp";
     version = "1.0-unstable-2024-06-17";
@@ -28,15 +34,16 @@
 
       collects=$out/share/racket/collects
       mkdir -p $collects
-      cp -r sicp sicp-pict sicp-doc $collects/
+      cp -r sicp sicp-pict $collects/
 
-      # Precompile to .zo so the store copy is not recompiled on every run.
-      # raco wants a writable HOME for its info cache.
+      # Run a full `raco setup` while $out is still writable. This has to cover
+      # *every* module, tests included, not just the entry points: anything
+      # left uncompiled here is something a later `raco setup` on the installed
+      # system would try to compile into the read-only store, and fail on.
+      # raco also wants a writable HOME for its info cache.
       export HOME=$TMPDIR
-      PLTCOLLECTS=":$collects" raco make -j $NIX_BUILD_CORES \
-        $collects/sicp/main.rkt \
-        $collects/sicp/lang/reader.rkt \
-        $collects/sicp-pict/main.rkt
+      PLTCOLLECTS=":$collects" raco setup --no-docs --no-launcher \
+        -j $NIX_BUILD_CORES -l sicp sicp-pict
 
       runHook postInstall
     '';
