@@ -117,6 +117,7 @@
     brave
     tor-browser
     zotero
+    gopeed # GUI multi-protocol download manager (HTTP/BitTorrent/magnet)
 
     inputs.claude-desktop.packages.${pkgs.stdenv.hostPlatform.system}.claude-desktop
   ];
