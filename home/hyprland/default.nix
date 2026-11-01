@@ -9,6 +9,9 @@ in {
   # catppuccin's `colors._var` render as a usable `local colors = ...`.
   wayland.windowManager.hyprland.configType = "lua";
 
+  # Stacked vertically: the external sits above the laptop panel, which is
+  # centred under it. Positions are in logical pixels, so eDP-1 is 1280x720
+  # wide/tall after its 1.5 scale: x = (2560 - 1280) / 2, y = external height.
   wayland.windowManager.hyprland.settings.monitor = [
     {
       output = "HDMI-A-1";
@@ -19,7 +22,7 @@ in {
     {
       output = "eDP-1";
       mode = "1920x1080@60";
-      position = "2560x0";
+      position = "640x1080";
       scale = 1.5;
     }
     # fallback for any other monitor
