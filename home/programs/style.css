@@ -7,49 +7,65 @@ window {
   background-color: rgba(0, 0, 0, 0.7);
 }
 
-.main {
+box.main {
   border-radius: 20px;
   background-color: rgba(30, 30, 46, 0.8); /* Catppuccin Mocha: Base */
   border: 2px solid #89b4fa; /* Catppuccin Mocha: Blue */
 }
 
-entry {
+/* The search field is a GtkText, whose CSS node is `text` -- not `entry`. */
+text {
   min-height: 40px;
+  padding: 0 15px;
   border-radius: 20px;
   background: transparent;
   box-shadow: none;
   border: none;
-  color: #cdd6f4; /* Catppuccin Mocha: Text */
+  color: #ffffff;
+  caret-color: #ffffff;
+}
+
+text selection {
+  background-color: #89b4fa; /* Catppuccin Mocha: Blue */
+  color: #1e1e2e; /* Catppuccin Mocha: Base */
 }
 
 .matches {
   background-color: transparent;
 }
 
-.plugin {
+list.plugin {
   background: transparent;
   padding-bottom: 5px;
 }
 
-.match {
-  padding: 2.5px;
-  color: #cdd6f4;
+/* Row, box, icon and both labels all carry `match`, so pad the row only. */
+row.match {
+  padding: 2.5px 2.5px 2.5px 15px;
+  background: transparent;
 }
 
-.match:selected {
+label.match {
+  color: #ffffff;
+}
+
+label.match.description {
+  font-size: 10px;
+  color: #ffffff;
+}
+
+row.match:selected {
   background: transparent;
   border-right: 4px solid #89b4fa; /* Catppuccin Mocha: Blue */
   border-left: 4px solid #89b4fa;
   border-radius: 4px;
-  color: #89b4fa;
 }
 
-.description {
-  font-size: 10px;
-  color: #cdd6f4; /* Catppuccin Mocha: Subtext1 */
+row.match:selected label.match {
+  color: #89b4fa; /* Catppuccin Mocha: Blue */
 }
 
-.info label {
+label.plugin.info {
   font-size: 14px;
   color: #6c7086; /* Catppuccin Mocha: Overlay0 */
 }
