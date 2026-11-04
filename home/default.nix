@@ -109,7 +109,6 @@
     # per-project nix shell or python3.withPackages for libraries).
     python3
 
-    obsidian
     zsh
     vscode
     telegram-desktop
