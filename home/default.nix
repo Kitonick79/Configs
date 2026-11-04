@@ -55,6 +55,7 @@
     eza # A modern replacement for ‘ls’
     fzf # A command-line fuzzy finder
     glow # a cli markdown renderer
+    pandoc # universal document converter
     yazi # terminal file manager
     gh # GitHub CLI
 
