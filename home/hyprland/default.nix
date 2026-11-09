@@ -9,20 +9,40 @@ in {
   # catppuccin's `colors._var` render as a usable `local colors = ...`.
   wayland.windowManager.hyprland.configType = "lua";
 
-  # Stacked vertically: the external sits above the laptop panel, which is
-  # centred under it. Positions are in logical pixels, so eDP-1 is 1280x720
-  # wide/tall after its 1.5 scale: x = (2560 - 1280) / 2, y = external height.
+  # eDP-1 is the anchor at 0x0 and every external places itself above it, so
+  # adding a monitor touches only its own rule. Positions are logical pixels
+  # (physical over scale), making eDP-1 1280x720; an external above it sits at
+  # y = -(its logical height), and x = -(its logical width - 1280) / 2 to
+  # centre the laptop beneath it. Both externals below are 2560 logical wide,
+  # so both land on x = -640.
+  #
+  # Externals match on description rather than port: this laptop has a single
+  # HDMI port, so both of them show up as HDMI-A-1 and the port name alone
+  # cannot tell them apart. The serial is omitted from each description so the
+  # rules match the model, not one specific unit.
   wayland.windowManager.hyprland.settings.monitor = [
+    # AOC U27B3A, 27" 4K. `highres` takes the best mode the link can carry:
+    # 3840x2160@60 over DisplayPort (via the USB-C port), but only @30 over
+    # the EliteBook's HDMI port, which is 1.4 and cannot clock 4K faster.
+    # That keeps one rule correct on either cable.
     {
-      output = "HDMI-A-1";
+      output = "desc:AOC U27B3A";
+      mode = "highres";
+      position = "-640x-1440";
+      scale = 1.5;
+    }
+    # Dell U2917W, 29" 21:9 ultrawide. Native 2560x1080 at ~96 DPI, so it
+    # wants no scaling.
+    {
+      output = "desc:Dell Inc. DELL U2917W";
       mode = "2560x1080@60";
-      position = "0x0";
+      position = "-640x-1080";
       scale = 1;
     }
     {
       output = "eDP-1";
       mode = "1920x1080@60";
-      position = "640x1080";
+      position = "0x0";
       scale = 1.5;
     }
     # fallback for any other monitor
