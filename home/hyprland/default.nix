@@ -150,6 +150,9 @@ in {
     -- focus the other monitor. `+1` cycles rather than taking a direction, so
     -- it reads as a toggle with two attached and still reaches a third.
     hl.bind(mod .. " + D", hl.dsp.focus({ monitor = "+1" }))
+    -- send the active window to the other monitor, cycling the same way.
+    -- Focus travels with the window, so this lands you where it went.
+    hl.bind(mod .. " + SHIFT + D", hl.dsp.window.move({ monitor = "+1" }))
 
     -- workspace selection, and moving the active window to a workspace
     for i = 1, 10 do
