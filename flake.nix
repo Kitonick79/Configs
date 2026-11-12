@@ -52,6 +52,10 @@
       config = {
         allowUnfree = true;
         allowUnfreePredicate = _: true;
+        # Zotero bundles Firefox ESR 140, EOL since 2026-10-13.
+        permittedInsecurePackages = [
+          "firefox-esr-140-bin-unwrapped-140.17.0esr"
+        ];
       };
     };
   in {
