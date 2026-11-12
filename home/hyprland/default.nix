@@ -135,8 +135,8 @@ in {
     -- TODO: find how to do it with waybar
     -- hl.bind(mod .. " + SHIFT + N", hl.dsp.exec_cmd("makoctl mode -t do-not-disturb"))
 
-    -- lock screen
-    hl.bind(mod .. " + L", hl.dsp.exec_cmd("loginctl lock-session"))
+    -- lock screen. On ESCAPE rather than L, which steps workspaces below.
+    hl.bind(mod .. " + ESCAPE", hl.dsp.exec_cmd("loginctl lock-session"))
 
     -- hyprland management
     hl.bind(mod .. " + R", hl.dsp.exec_cmd("hyprctl reload"))
@@ -147,6 +147,10 @@ in {
     hl.bind(mod .. " + up", hl.dsp.focus({ direction = "up" }))
     hl.bind(mod .. " + down", hl.dsp.focus({ direction = "down" }))
 
+    -- focus the other monitor. `+1` cycles rather than taking a direction, so
+    -- it reads as a toggle with two attached and still reaches a third.
+    hl.bind(mod .. " + D", hl.dsp.focus({ monitor = "+1" }))
+
     -- workspace selection, and moving the active window to a workspace
     for i = 1, 10 do
       local key = i % 10 -- 10 maps to key 0
@@ -154,7 +158,10 @@ in {
       hl.bind(mod .. " + CTRL + " .. key, hl.dsp.window.move({ workspace = i }))
     end
 
-    -- scroll through workspaces
+    -- step through workspaces, by key and by scroll. `e-1`/`e+1` move to the
+    -- previous/next workspace that exists, skipping empty numbers.
+    hl.bind(mod .. " + H", hl.dsp.focus({ workspace = "e-1" }))
+    hl.bind(mod .. " + L", hl.dsp.focus({ workspace = "e+1" }))
     hl.bind(mod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
     hl.bind(mod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
 
