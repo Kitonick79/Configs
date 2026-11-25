@@ -119,8 +119,10 @@ in {
     hl.bind(mod .. " + A", hl.dsp.layout("togglesplit"))
 
     -- screenshots
-    hl.bind("Print", hl.dsp.exec_cmd("grim - | wl-copy"))
-    hl.bind("SHIFT + Print", hl.dsp.exec_cmd([[grim -g "$(slurp)" - | wl-copy]]))
+    -- copy to clipboard and save a PNG to $XDG_SCREENSHOTS_DIR,
+    -- else $XDG_PICTURES_DIR, else $HOME
+    hl.bind("Print", hl.dsp.exec_cmd("grimblast --notify copysave screen"))
+    hl.bind("SHIFT + Print", hl.dsp.exec_cmd("grimblast --notify copysave area"))
 
     -- brightness control
     hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl set 10%+"))

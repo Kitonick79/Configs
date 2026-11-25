@@ -161,7 +161,8 @@
     WLR_DRM_DEVICES = "/dev/dri/card1"; # force Hyprland to use Intel iGPU, avoids AMD cross-GPU instability
     EDITOR = "nvim";
     VISUAL = "nvim";
-    NIXOS_OZONE_WL = "1"; 
+    NIXOS_OZONE_WL = "1";
+    XDG_SCREENSHOTS_DIR = "$HOME/Pictures/Screenshots"; # where grimblast saves screenshots
   };
 
   # This value determines the home Manager release that your
