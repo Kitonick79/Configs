@@ -57,6 +57,7 @@
     glow # a cli markdown renderer
     pandoc # universal document converter
     yazi # terminal file manager
+    wl-clipboard # wl-copy / wl-paste: Wayland clipboard from the terminal
     gh # GitHub CLI
 
     # networking tools
