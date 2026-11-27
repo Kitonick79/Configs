@@ -72,6 +72,16 @@ in {
     }
   ];
 
+  # Ignore maximize requests from every app, as Hyprland's stock config does.
+  # Without it kitty opens maximized over the workspace instead of tiling.
+  wayland.windowManager.hyprland.settings.window_rule = [
+    {
+      name = "suppress-maximize-events";
+      match.class = ".*";
+      suppress_event = "maximize";
+    }
+  ];
+
   wayland.windowManager.hyprland.settings.config = {
     # `colors` is the local that catppuccin's module defines above this call
     general.col = {
