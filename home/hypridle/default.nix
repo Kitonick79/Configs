@@ -8,7 +8,10 @@ in {
       general = {
         lock_cmd = "WLR_DRM_DEVICES=/dev/dri/card1 hyprlock";
         before_sleep_cmd = "loginctl lock-session";
-        after_sleep_cmd = "hyprctl dispatch dpms on";
+        # With the Lua config, `hyprctl dispatch` evaluates its argument as a
+        # Lua dispatcher call. An unrecognised action value toggles DPMS, so
+        # "on" must be spelled exactly.
+        after_sleep_cmd = "hyprctl dispatch 'hl.dsp.dpms({ action = \"on\" })'";
         ignore_dbus_inhibit = false;
         ignore_systemd_inhibit = false;
       };
