@@ -181,6 +181,11 @@
   programs.hyprland.enable = true;
   programs.hyprland.withUWSM = true;
 
+  # hyprlock authenticates through /etc/pam.d/hyprlock. hyprlock is enabled in
+  # home-manager, which cannot create system PAM services, so declare it here;
+  # without it hyprlock falls back to su's PAM stack.
+  security.pam.services.hyprlock = {};
+
   nix = {
     settings = {
       trusted-users = ["root" "kit" "@wheel"];
